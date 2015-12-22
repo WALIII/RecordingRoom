@@ -1,0 +1,81 @@
+function PullWavFiles
+
+
+
+
+  %% PATHS:
+  START_DIR_ROOT = '/Volumes/recording_folder'; %code will start in ABA_ACTIVE. Put Text File
+  END_DIR_ROOT =  '/Users/glab/Documents/Recording_Room';
+  TEXT_DIR = '/Users/glab/Desktop/INPUT.txt';
+  if nargin<1 | isempty(DIR), DIR=pwd; end
+
+  %% Variables:
+  INPUT = tdfread(TEXT_DIR,'\t'); % Assuimg that the .text file is in the path...
+  BOX_ID = cellstr(INPUT.BOX_ID);
+  STATUS = INPUT.STATUS;
+  BIRD_ID = cellstr(INPUT.BIRD_ID);
+
+
+  disp('Processing Data...');
+
+  % [nblanks formatstring]=fb_progressbar(100);
+  % fprintf(1,['Progress:  ' blanks(nblanks)]);
+
+  for i=1:length(BOX_ID)
+    if STATUS(i) == 1;
+
+  current_path = strcat(START_DIR_ROOT,'/',BOX_ID{i});
+  current_date =  datetime('today');
+  current_date = datestr(current_date);
+  file_ending = strcat(BIRD_ID{i},'/',current_date)
+  % put a copy in a directory called: path.../BIRD_DATA
+  local_copy_path = strcat(START_DIR_ROOT,'/','BIRD_DATA','/',file_ending);
+   % put processed data here... edit to actual path...
+  destined_path = strcat(END_DIR_ROOT,'/',file_ending);
+
+  cd(current_path) % GO into box, copy .mov data into the current date
+
+   mov_listing=dir(fullfile(pwd,'*.mov')); % Get all .mov files in directory
+   mov_listing={mov_listing(:).name};
+   filenames=mov_listing;
+
+  disp('Moving Files...');
+  mkdir(local_copy_path);
+  for ii = 1:length(mov_listing)
+     movefile(filenames{ii},local_copy_path)
+  end
+
+
+  mkdir(destined_path);
+   copyfile(local_copy_path,destined_path)
+  disp('Parsing Data...');
+   cd(destined_path);
+          FS_AV_Parse();
+          if STATUS(i) == 2
+              % Automated template matching, and potentially ROI
+              % extraction...
+          end
+
+      cd(START_DIR_ROOT); % go back to the original folder in ARGO or calypso
+  end
+  end
+  end
+
+
+
+mail = 'wal3lab'; %Your GMail email address
+password = 'madlib3RD1989';  %Your GMail password
+setpref('Internet','SMTP_Server','smtp.gmail.com');
+setpref('Internet','E_mail',mail);
+setpref('Internet','SMTP_Username',mail);
+setpref('Internet','SMTP_Password',password);
+props = java.lang.System.getProperties;
+props.setProperty('mail.smtp.auth','true');
+props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
+props.setProperty('mail.smtp.socketFactory.port','465');
+% Send the email.  Note that the first input is the address you are sending the email to
+
+
+
+
+sendmail('bliberti@bu.edu','Weekly Summary',TextBody,filename2)
