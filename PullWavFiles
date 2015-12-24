@@ -43,6 +43,7 @@ function PullWavFiles(DATE)
   IMG_path = strcat(START_DIR_ROOT,'/',BOX_ID{i},'-IMG');
   current_date =  datetime('today');
   current_date = datestr(current_date);
+
   file_ending = strcat(BIRD_ID{i},'/',current_date)
   % put a copy in a directory called: path. ../BIRD_DATA
   local_copy_path = strcat(START_DIR_ROOT,'/','BIRD_DATA','/',file_ending);
@@ -51,7 +52,9 @@ function PullWavFiles(DATE)
 
   cd(WAV_path) % GO into box, copy .mov data into the current date
 
-   wav_listing=dir(fullfile(pwd,'*.wav')); % Get all .mov files in directory
+
+   % datefile = strcat('*',DATE,'.wav'; % there is some strange format being used currently- might be hard to interperate...
+   wav_listing=dir(fullfile(pwd,'*.wav')); % Get all .wav files in directory, (eventually,  with proper signing.)
    wav_listing={wav_listing(:).name};
    filenames=wav_listing;
    TotalFiles{i} = size(wav_listing);
