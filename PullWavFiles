@@ -62,6 +62,9 @@ function PullWavFiles(DATE)
   disp('Moving Files...');
   mkdir(local_copy_path);
   for ii = 1:length(wav_listing)
+files=dir(strcat('/Users/ARGO/Dropbox/LOGS/',filenames{ii}));
+last_modified=files.date;
+if last_modified >....DATE
      movefile(filenames{ii},local_copy_path)
   end
 
