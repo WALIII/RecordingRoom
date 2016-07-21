@@ -1,8 +1,8 @@
 function PullWavFiles(DATE)
-  % PullWavFiles
+  % PullWavFiles.m
 
-  % Transfer Data from FreedomScopes every evening at midnight, and run
-  % analysis on them
+  % Transfer Data from Recording Room every evening at midnight, and run
+  % analysis on them. Requires the repository zftft from @jmarkow
 
   %   Created: 2015/12/22
   %   By: WALIII
@@ -102,5 +102,6 @@ txt1 = strcat('Box ',BOX_ID{:},'successfully moved, and contained: ',TotalFiles{
 TextBody = txt1;
 
 
-sendmail('bliberti@bu.edu','Weekly Summary',TextBody)
+sendmail('bliberti@bu.edu','Recording Room Summary',TextBody)
+sendmail('dpleman@bu.edu','Recording Room Summary',TextBody)
 end
