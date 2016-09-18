@@ -20,7 +20,7 @@ function PullWavFiles(DATE)
 
   %% PATHS:
   START_DIR_ROOT = '/Volumes/raid//recording'; % Recording room computer, where all the main folders are kept.
-  END_DIR_ROOT =  '/Users/wgillis/DRecording_Room'; % Main analysis computer.
+  END_DIR_ROOT =  '/Users/wgillis/Recording_Room'; % Main analysis computer.
   TEXT_DIR = '/Users/wgillis/Desktop/RR_dashboard.txt'; % textfile for recording room input
   if nargin<1 | isempty(DATE), DATE=datetime('today'); end % by default, run on today's files
 
@@ -62,7 +62,7 @@ function PullWavFiles(DATE)
   disp('Moving Files...');
   mkdir(local_copy_path);
   for ii = 1:length(wav_listing)
-files=dir(strcat('/Users/ARGO/Dropbox/LOGS/',filenames{ii}));
+files=dir(strcat('/Users/wgillis/Recording_Room',filenames{ii}));
 last_modified=files.date;
 if last_modified >....DATE
      movefile(filenames{ii},local_copy_path)
