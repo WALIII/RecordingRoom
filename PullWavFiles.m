@@ -19,9 +19,9 @@ function PullWavFiles(DATE)
 
 
   %% PATHS:
-  START_DIR_ROOT = '/Volumes/recording_folder'; % Recording room computer, where all the main folders are kept.
-  END_DIR_ROOT =  '/Users/glab/Documents/Recording_Room'; % Main analysis computer.
-  TEXT_DIR = '/Users/glab/Desktop/RecordingRoomDashboard.txt'; % textfile for recording room input
+  START_DIR_ROOT = '/Volumes/raid//recording'; % Recording room computer, where all the main folders are kept.
+  END_DIR_ROOT =  '/Users/wgillis/DRecording_Room'; % Main analysis computer.
+  TEXT_DIR = '/Users/wgillis/Desktop/RR_dashboard.txt'; % textfile for recording room input
   if nargin<1 | isempty(DATE), DATE=datetime('today'); end % by default, run on today's files
 
   %% Variables:
