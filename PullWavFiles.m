@@ -77,6 +77,12 @@ function PullWavFiles(DATE)
               % Automated template matching, and potentially more sophisticted
               % extraction methods...
           end
+          
+          % How much work did we do?
+
+          delete('*.wav')
+          
+          
 % rmdir(local_copy_path) % remove the local copy path
       cd(START_DIR_ROOT); % go back to the original folder in ARGO or calypso
   end
@@ -84,23 +90,23 @@ function PullWavFiles(DATE)
 
 
 
-
-mail = 'wal3lab'; %Your GMail email address
-password = 'madlib3RD1989';  %Your GMail password
-setpref('Internet','SMTP_Server','smtp.gmail.com');
-setpref('Internet','E_mail',mail);
-setpref('Internet','SMTP_Username',mail);
-setpref('Internet','SMTP_Password',password);
-props = java.lang.System.getProperties;
-props.setProperty('mail.smtp.auth','true');
-props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
-props.setProperty('mail.smtp.socketFactory.port','465');
-% Send the email.  Note that the first input is the address you are sending the email to
-txt1 = strcat('Box ',int2str(BOX_ID(:)),'successfully moved, and contained: ',TotalFiles{:},' recordings')
-
-TextBody = txt1;
-
-
-sendmail('bliberti@bu.edu','Recording Room Summary',TextBody)
+% 
+% mail = 'wal3lab'; %Your GMail email address
+% password = 'madlib3RD1989';  %Your GMail password
+% setpref('Internet','SMTP_Server','smtp.gmail.com');
+% setpref('Internet','E_mail',mail);
+% setpref('Internet','SMTP_Username',mail);
+% setpref('Internet','SMTP_Password',password);
+% props = java.lang.System.getProperties;
+% props.setProperty('mail.smtp.auth','true');
+% props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
+% props.setProperty('mail.smtp.socketFactory.port','465');
+% % Send the email.  Note that the first input is the address you are sending the email to
+%txt1 = strcat('Box ',int2str(BOX_ID),' successfully moved, and contained: ', int2str(TotalFiles{:,2}'),' recordings')
+% 
+% TextBody = txt1;
+% 
+% 
+% sendmail('bliberti@bu.edu','Recording Room Summary',TextBody)
 % sendmail('dpleman@bu.edu','Recording Room Summary',TextBody)
 end
